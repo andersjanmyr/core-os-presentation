@@ -12,6 +12,7 @@ h1, h2 {
   bottom: 120px;
   width: 30px;
   height: 30px;
+  z-index: -1;
   content: url(images/jay_logo.png);
 }
 
