@@ -60,15 +60,14 @@
 # Docker
 ![](docker.png)
 
-!SLIDE bullets
+!SLIDE bullets small
 # Docker
 
-*
-*
-
-!SLIDE center
-# systemd
-![](systemd.png)
+* Containers isolates an application's view of the OS
+* CPU, memory, block I/O, network
+* Lightweight VM
+* No separate OS
+* An interface between Dev and Ops
 
 !SLIDE bullets, small
 # systemd
@@ -222,7 +221,7 @@
 
 
 !SLIDE code small
-# fleet, unit-file with etcd registration
+# fleet, unit-file etcd
 
     @@@ ini
     [Unit]
@@ -267,7 +266,7 @@
     Conflicts=nginx@*.service
 
 !SLIDE code small
-# fleet, unit-file with sidekick
+# fleet, unit-file sidekick
 
     @@@ ini
     [Unit]

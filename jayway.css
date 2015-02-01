@@ -6,6 +6,10 @@ h1, h2 {
   color: white;
   font-family: "American Typewriter";
 }
+.small h1 {
+  font-size: 8em;
+}
+
 .content::after {
   position: absolute;
   right: 250px;
