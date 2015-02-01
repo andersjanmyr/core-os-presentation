@@ -302,14 +302,13 @@
                 automount, timer, path'
 
 
-!SLIDE bullets
+!SLIDE bullets small
 # confd
 
-Lightweight configuration management tool
-
-* Keeping configuration files up-to-date
-* Works with etcd, consul, env-vars
-* Reloads applicaiton on changes
+* Lightweight configuration management tool
+* Keeps configuration files up-to-date
+* Works with etcd, consul, environment-vars
+* Reloads application on changes
 
 !SLIDE code small
 # confd, nginx.toml

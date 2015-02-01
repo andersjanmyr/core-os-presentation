@@ -1,7 +1,7 @@
 !SLIDE bullets small
 # Slides
 
-* http://github.com/andersjanmyr/core-os-presentation
+* http://andersjanmyr.github.io/core-os-presentation/
 
 
 !SLIDE
