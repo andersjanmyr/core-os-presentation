@@ -301,6 +301,72 @@
     suffix   = 'One of service, socket, device, mount,
                 automount, timer, path'
 
+!SLIDE code small
+# fleet, unit-file global
+
+    @@@ ini
+    # datadog.service
+    [Unit]
+    Description=Datadog Service
+
+    [Service]
+    TimeoutStartSec=0
+    ExecStartPre=-/usr/bin/docker kill dd-agent
+    ExecStartPre=-/usr/bin/docker rm dd-agent
+    ExecStartPre=/usr/bin/docker pull datadog/docker-dd-agent
+    ExecStart=/usr/bin/bash -c \
+    "/usr/bin/docker run --privileged --name dd-agent \
+    -h `hostname` \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /proc/mounts:/host/proc/mounts:ro \
+    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+    -e API_KEY=`etcdctl get /ddapikey` \
+    datadog/docker-dd-agent"
+
+    [X-Fleet]
+    Global=true
+
+!SLIDE code small
+# fleetctl, start, list-units
+
+    @@@sh
+    $ fleetctl start datadog.service
+    $ fleetctl list-units
+    UNIT                        MACHINE                 ACTIVE    SUB
+    myapp.service               c9de9451.../10.10.1.3   active    running
+    apache@1.service            491586a6.../10.10.1.2   active    running
+    apache@2.service            148a18ff.../10.10.1.1   active    running
+    apache-discovery@1.service  491586a6.../10.10.1.2   active    running
+    apache-discovery@2.service  148a18ff.../10.10.1.1   active    running
+    datadog.service             148a18ff.../10.10.1.1   active    running
+    datadog.service             491586a6.../10.10.1.2   active    running
+    datadog.service             c9de9451.../10.10.1.3   active    running
+
+!SLIDE code small
+# fleetctl, status
+
+    @@@sh
+    $ fleetctl status hello.service
+    hello.service - Hello World
+       Loaded: loaded (/run/systemd/system/hello.service;
+       Active: active (running) since Wed 2014-01-29 23:20:23
+     Main PID: 6973 (bash)
+       CGroup: /system.slice/hello.1.service
+               ├─ 6973 /bin/bash -c while true; do echo "Hello, world"; sleep 1; done
+               └─20381 sleep 1
+
+!SLIDE code small
+# fleetctl, journal
+
+
+    @@@sh
+    fleetctl journal hello.service
+    -- Logs begin at Thu 2014-08-21 18:27:04 UTC, end at Thu 2014-08-21
+    19:07:38 UTC. --
+    Aug 21 19:07:38 core-03 bash[1127]: Hello, world
+
+
+
 
 !SLIDE bullets small
 # confd

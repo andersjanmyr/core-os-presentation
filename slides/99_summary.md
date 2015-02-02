@@ -1,3 +1,8 @@
+!SLIDE center
+# Core OS Summary
+
+![](coreos-components.png)
+
 !SLIDE bullets small
 # Slides
 
